@@ -34,6 +34,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add preprocessing/namadataset_preprocessing.csv
+          git add preprocessing/StudentPerformanceFactors_preprocessing.csv
           git commit -m "Update: Dataset terbaru hasil preprocessing otomatis" || echo "No changes to commit"
           git push
