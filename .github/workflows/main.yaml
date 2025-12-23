@@ -2,14 +2,14 @@ name: Auto Preprocessing Workflow
 
 on:
   push:
-    branches: [ main ]  # Berjalan otomatis saat kamu push ke branch main
+    branches: [ main ] 
 
 jobs:
   run-preprocessing:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Mengambil file dari repositori kamu
+      # 1. Mengambil file dari repositori
       - name: Checkout Code
         uses: actions/checkout@v3
 
@@ -17,19 +17,19 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12.7' # Sesuai contoh Python terbaru yang kamu punya
+          python-version: '3.12.7'
 
       # 3. Install library yang dibutuhkan agar script tidak error
       - name: Install Dependencies
         run: |
           pip install pandas scikit-learn joblib
 
-      # 4. Menjalankan fungsi automate kamu
+      # 4. Menjalankan fungsi automate
       - name: Run Automate Script
         run: |
-          python preprocessing/automate_Nama-siswa.py
+          python preprocessing/automate_Eka-Dela-Sari.py
 
-      # 5. Mengirim balik (push) file hasil preprocessing ke GitHub kamu
+      # 5. Mengirim balik (push) file hasil preprocessing ke GitHub
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
