@@ -1,0 +1,39 @@
+name: Auto Preprocessing Workflow
+
+on:
+  push:
+    branches: [ main ]  # Berjalan otomatis saat kamu push ke branch main
+
+jobs:
+  run-preprocessing:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Mengambil file dari repositori kamu
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # 2. Install Python versi terbaru
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12.7' # Sesuai contoh Python terbaru yang kamu punya
+
+      # 3. Install library yang dibutuhkan agar script tidak error
+      - name: Install Dependencies
+        run: |
+          pip install pandas scikit-learn joblib
+
+      # 4. Menjalankan fungsi automate kamu
+      - name: Run Automate Script
+        run: |
+          python preprocessing/automate_Nama-siswa.py
+
+      # 5. Mengirim balik (push) file hasil preprocessing ke GitHub kamu
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add preprocessing/namadataset_preprocessing.csv
+          git commit -m "Update: Dataset terbaru hasil preprocessing otomatis" || echo "No changes to commit"
+          git push
